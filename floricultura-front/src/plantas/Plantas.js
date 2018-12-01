@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import FormularioPlanta from './FormularioPlanta';
+import Card from './Card'
 
 export default class Plantas extends Component{
     constructor(){
@@ -7,7 +9,12 @@ export default class Plantas extends Component{
     }
 
     render(){
-        return<h1>Helo World</h1>; 
+        return(
+            <section>
+                <FormularioPlanta/>
+                
+            </section>
+        ) 
     }
 
 }

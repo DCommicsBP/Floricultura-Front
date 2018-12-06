@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 export default class Tabela extends Component {
     constructor() {
         super();
     }
 
-   
+    listar(){
+        axios.get(`http://localhost:3000/cliente`)
+        .then(res => {
+          const persons = res.data;
+          this.setState({ persons });
+        })
+
+    }
+
+    componentDidMount() {
+        listar();
+    }
 
     render() {
         return (
@@ -18,8 +30,7 @@ export default class Tabela extends Component {
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
                             <th scope="col">Telefone</th>
-                            <th scope="col">Data da Última Compra</th>
-                            <th scope="col">Detalhes</th>
+                            <th scope="col">Editar</th>
                             <th scope="col">Excluir</th>
                         </tr>
                     </thead>

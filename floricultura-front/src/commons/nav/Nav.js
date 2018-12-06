@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import React, { Component } from 'react';
 export default class Nav extends Component {
     constructor() {
@@ -6,31 +8,34 @@ export default class Nav extends Component {
 
     render() {
         return (
-            <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Clientes <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Usuários</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Plantas</a>
-                        </li>
+            <section>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/clientes">Clientes</Link>
+                </li>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/usuarios">Usuários</Link>
+                </li>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/plantas">Plantas</Link>
+                </li>
 
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Vendas</a>
-                        </li>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="#">Plantas</Link>
+                </li>
 
-                    </ul>
-                </div>
-                <img src={require('../../images/nav/evergreen.jpg')} style={{width: '200px', height: '100px'}} />
+              </ul>
+            </div>
+            <img src={require('../../images/nav/evergreen.jpg')} style={{width: '200px', height: '100px'}} />
 
-            </nav>
+          </nav>
+        </section>
+
         )
     }
 }

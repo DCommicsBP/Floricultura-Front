@@ -1,6 +1,7 @@
 import React, {Component} from 'react'; 
 import Lista from './Lista';
 import Formulario from './Formulario';
+import Nav from '../commons/nav/Nav';
 export default class Usuarios extends Component{
     constructor(){
         super(); 
@@ -8,13 +9,19 @@ export default class Usuarios extends Component{
 
     render(){
         return(
-       <section>
+       <section >
+          <Nav /> 
+
+            <div className="container">
+
+
            <Lista/>
-           <br/><br/    >
+           <br/><br/>
            <button className="btn btn-primary">
                 Adicionar novo Usuario
            </button>
            <Formulario/>
+           </div>
 
 
        </section>

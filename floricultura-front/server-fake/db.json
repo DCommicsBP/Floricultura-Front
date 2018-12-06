@@ -1,0 +1,31 @@
+{
+    "usuario": [
+        {
+            "id": 0,
+            "nome": "daione 01"
+        },
+        {
+            "id": 1,
+            "nome": "daione 02"
+        },
+        {
+            "id": 2,
+            "nome": "daione 03"
+        }
+    ], 
+
+    "turma":[
+        {
+            "id": 0,
+            "nome": "turma 03"
+            },
+            {
+                "id": 1,
+                "nome": "turma 02"
+                },
+                {
+                    "id": 2,
+                    "nome": "turma 01"
+                    }
+    ]
+}

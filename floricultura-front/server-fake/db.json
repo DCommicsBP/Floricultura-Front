@@ -17,39 +17,30 @@
       "id": 3
     }
   ],
-
-"cliente": [
+  "cliente": [
     {
       "id": 0,
       "nome": "Renata Cardoso",
-      "email":"rcardoso@email.com",
-      "telefone":"(51) 555-555-55"
+      "email": "rcardoso@email.com",
+      "telefone": "(51) 555-555-55"
     },
-    {
-      "id": 1,
-      "nome": "Matheus Benka",
-      "email":"mbenka@email.com",
-      "telefone":"(51) 333-111-11"
-    },
-    
     {
       "id": 2,
       "nome": "Rafael Fronteira",
-      "email":"rfronteira@email.com",
-      "telefone":"(51) 444-333-33" 
+      "email": "rfronteira@email.com",
+      "telefone": "(51) 444-333-33"
     },
     {
       "id": 3,
       "nome": "Victor Esquici",
-      "email":"vsesquici@email.com",
-      "telefone":"(51) 333-333-33" 
+      "email": "vsesquici@email.com",
+      "telefone": "(51) 333-333-33"
     },
     {
       "id": 4,
       "nome": "Bruna Pavan Faccion",
-      "email":"bpfaccion@email.com",
-      "telefone":"(51) 111-111-11" 
+      "email": "bpfaccion@email.com",
+      "telefone": "(51) 111-111-11"
     }
-
   ]
 }

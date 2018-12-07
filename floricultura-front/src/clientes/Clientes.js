@@ -1,34 +1,149 @@
 import React, { Component } from 'react';
-import Lista from './Lista'
-import Formulario from './Formulario';
 import Nav from '../commons/nav/Nav';
-
+import axios from 'axios'
 export default class Clientes extends Component {
 
     constructor() {
         super();
+    }
+    state = { clientes: [], cliente: { nome:"", email:"", telefone:""}} 
+
+    listar() {
+        axios.get(`http://localhost:3000/cliente`)
+            .then(res => {
+                const clientes = res.data;
+                this.setState({ clientes });
+            })
+    }
+
+    carregar(id) {
+        axios.get(`http://localhost:3000/cliente/` + id)
+            .then(res => {
+                const clientes = res.data;
+                this.setState({ clientes });
+            })
+    }
+    editar() {
 
     }
 
-    titleStyle = {
-        textAlign: 'center !important'
+    excluir(e){
+        e.preventDefault();
+        axios.delete(`http://localhost:3000/cliente/`+e.target.value)
+      .then(res => {
+          this.listar();
+        console.log(res);
+        console.log(res.data);
+      })
 
+        debugger; 
+    }
+    handleNome = e =>{
+        const valor = e.target.value;
+        this.setState({ nome: valor})
+    }
+
+    handleEmail = e =>{
+        const valor = e.target.value;
+        this.setState({ email: valor})
+    }
+
+    handleTelefone = e =>{
+        const valor = e.target.value;
+        this.setState({ telefone: valor})
+    }
+
+    handleSubmit = event => {
+        debugger; 
+        event.preventDefault();
+    
+        const cliente = {
+          nome: this.state.nome,
+          email:this.state.email, 
+          telefone:this.state.telefone
+        };
+    
+        axios.post(`http://localhost:3000/cliente`, {"nome": cliente.nome, "email":cliente.email, "telefone":cliente.telefone  })
+          .then(res => {
+            console.log(res);
+            console.log(res.data);
+          })
+    this.listar(); 
+    }
+
+
+    componentDidMount= ()=> {
+        this.listar();
+        
     }
 
     render() {
         return (
             <section>
                 <Nav />
-
                 <div className="container">
                     <div className="row" style={this.titleStyle}>
                         <h1>Cadastro de Clientes</h1>
                     </div>
-                    <Lista />
-                    <br />
-                    <br />
-                    <Formulario />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.clientes.map(cliente =>
+                                <tr>
+                                    <th scope="row">{cliente.id}</th>
+                                    <td>{cliente.nome}</td>
+                                    <td>{cliente.email}</td>
+                                    <td>{cliente.telefone}</td>
+                                    <td><button type="button" className="btn btn-info" style={{ color: 'whitesmoke' }} value={cliente.id}>Editar</button></td>
+                                    <td><button type="button" className="btn btn-danger" value={cliente.id} onClick={e=>this.excluir(e)}>Excluir</button></td>
+                                </tr>
+                            )}
+
+                        </tbody>
+                    </table>
+                        <br /><br /><br /><br />
+                    <h3>Novo Cliente</h3>
+                    <form>
+
+                    <div className="form-group">
+                        <label for="inputAddress">Nome</label>
+                        <input type="text" className="form-control" id="name" placeholder="Nome" onChange={this.handleNome} value={this.state.nome}/>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <label for="inputEmail4">Email</label>
+                            <input type="email" className="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleEmail} value={this.state.email}/>
+                        </div>
+                        <div className="form-group">
+                            <label for="inputAddress">Telefone</label>
+                            <input type="text" className="form-control" id="name" placeholder="Telefone" onChange={this.handleTelefone} value={this.state.telefone}/>
+                        </div>
+
+                    </div>
+                    <br /><br />
+                    <div className="d-flex justify-content-center">
+                        <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
+                            <button type="submit" className="btn btn-success" onClick={this.handleSubmit}>Enviar</button>
+                        </div>
+                        <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
+                            <button type="reset" className="btn btn-dark" onClick={(e)=>this.postar(e)}>Limpar</button>
+                        </div>
+                    </div>
+                </form>
+
+                    <br /><br />
                 </div>
+
             </section>
         )
 

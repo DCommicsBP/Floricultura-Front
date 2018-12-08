@@ -15,7 +15,7 @@ export default class Clientes extends Component {
         });
     }
 
-    limpaCampos () {
+    limpaCampos() {
         this.setState({ nome: "", email: "", telefone: "" })
     }
 
@@ -57,7 +57,7 @@ export default class Clientes extends Component {
         debugger;
     }
 
-    
+
     handleSubmit = event => {
         event.preventDefault();
 
@@ -68,12 +68,9 @@ export default class Clientes extends Component {
         };
 
         axios.post(`http://localhost:3000/cliente`, { "nome": cliente.nome, "email": cliente.email, "telefone": cliente.telefone })
-            .then(res => {
-                debugger; 
-                this.setState({ nome: "", email: "", telefone: "" })
-
-                this.listar();
-
+        .then(res => {
+            this.setState({ nome: "", email: "", telefone: "" })
+            this.listar();
             })
     }
 

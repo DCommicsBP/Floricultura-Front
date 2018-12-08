@@ -13,9 +13,9 @@
       "id": 2
     },
     {
-      "nome": "Maggie Simpson",
-      "login": "maggie",
-      "senha": "maggie",
+      "nome": "Homer Simpson",
+      "login": "homer",
+      "senha": "homer",
       "id": 3
     }
   ],
@@ -53,11 +53,78 @@
   ],
   "planta": [
     {
-      "id": 1,
+      "id": 0,
       "nome": "planta01",
-      "valor": 5.6,
-      "qunatidade": 5,
-      "imagem":"../src/images/Plantas/flor02.jpeg"
+      "valor": "5.6",
+      "qunatidade": "5",
+      "imagem": "../../src/images/Plantas/flor.jpeg"
+    },
+    {
+      "id": 1,
+      "nome": "planta02",
+      "valor": "4.6",
+      "qunatidade": "5",
+      "imagem": "../../src/images/Plantas/flor.jpeg"
+    },
+    {
+      "id": 2,
+      "nome": "planta03",
+      "valor": "3.6",
+      "qunatidade": "2",
+      "imagem": "../../src/images/Plantas/flor.jpeg"
+    },
+    {
+      "id": 3,
+      "nome": "planta04",
+      "valor": "7.6",
+      "qunatidade": "1",
+      "imagem": "../../src/images/Plantas/flor.jpeg"
+    }
+  ],
+  "vendas": [
+    {
+      "id": 0,
+      "planta": {
+        "id": 3,
+        "nome": "planta04",
+        "valor": "7.6",
+        "qunatidade": "1",
+        "imagem": "../../src/images/Plantas/flor.jpeg"
+      },
+      "cliente": {
+        "nome": "Daione Caroline Balduzzi Pavan",
+        "email": "dayonne.p@gmail.com",
+        "telefone": "5132681666",
+        "id": 1
+      },
+      "usuario": {
+        "nome": "Lisa Simpson",
+        "login": "lisa",
+        "senha": "lisa",
+        "id": 2
+      }
+    },
+    {
+      "planta": {
+        "id": 3,
+        "nome": "planta04",
+        "valor": "7.6",
+        "qunatidade": "1",
+        "imagem": "../../src/images/Plantas/flor.jpeg"
+      },
+      "cliente": {
+        "nome": "Daione Caroline Balduzzi Pavan",
+        "email": "dayonne.p@gmail.com",
+        "telefone": "5132681666",
+        "id": 1
+      },
+      "usuario": {
+        "nome": "Lisa Simpson",
+        "login": "lisa",
+        "senha": "lisa",
+        "id": 2
+      },
+      "id": 1
     }
   ]
 }

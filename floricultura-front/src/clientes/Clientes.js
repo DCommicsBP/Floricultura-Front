@@ -4,9 +4,10 @@ import axios from 'axios'
 export default class Clientes extends Component {
 
     constructor() {
+
         super();
     }
-    state = { clientes: [], cliente: { nome:"", email:"", telefone:""}} 
+    state = { clientes: [], clienteParaEditar: {}, cliente: { nome: "", email: "", telefone: "", } }
 
     listar() {
         axios.get(`http://localhost:3000/cliente`)
@@ -23,58 +24,55 @@ export default class Clientes extends Component {
                 this.setState({ clientes });
             })
     }
-    editar() {
+
+    editar(cliente) {
+
+        this.setState({
+            clienteParaEditar: cliente
+        })
+        console.log(cliente)
+        debugger;
 
     }
 
-    excluir(e){
+    excluir(e) {
         e.preventDefault();
-        axios.delete(`http://localhost:3000/cliente/`+e.target.value)
-      .then(res => {
-          this.listar();
-        console.log(res);
-        console.log(res.data);
-      })
+        axios.delete(`http://localhost:3000/cliente/` + e.target.value)
+            .then(res => {
+                this.listar();
+                console.log(res);
+                console.log(res.data);
+            })
 
-        debugger; 
-    }
-    handleNome = e =>{
-        const valor = e.target.value;
-        this.setState({ nome: valor})
+        debugger;
     }
 
-    handleEmail = e =>{
-        const valor = e.target.value;
-        this.setState({ email: valor})
-    }
-
-    handleTelefone = e =>{
-        const valor = e.target.value;
-        this.setState({ telefone: valor})
+    setParam(param, valor) {
+        this.setState({
+            [param]: valor
+        });
     }
 
     handleSubmit = event => {
-        debugger; 
         event.preventDefault();
-    
+
         const cliente = {
-          nome: this.state.nome,
-          email:this.state.email, 
-          telefone:this.state.telefone
+            nome: this.state.nome,
+            email: this.state.email,
+            telefone: this.state.telefone
         };
-    
-        axios.post(`http://localhost:3000/cliente`, {"nome": cliente.nome, "email":cliente.email, "telefone":cliente.telefone  })
-          .then(res => {
-            console.log(res);
-            console.log(res.data);
-          })
-    this.listar(); 
+
+        this.setState({ nome: "", email: "", telefone: "" })
+        axios.post(`http://localhost:3000/cliente`, { "nome": cliente.nome, "email": cliente.email, "telefone": cliente.telefone })
+            .then(res => {
+                this.listar();
+
+            })
     }
 
 
-    componentDidMount= ()=> {
+    componentDidMount = () => {
         this.listar();
-        
     }
 
     render() {
@@ -104,42 +102,42 @@ export default class Clientes extends Component {
                                     <td>{cliente.email}</td>
                                     <td>{cliente.telefone}</td>
                                     <td><button type="button" className="btn btn-info" style={{ color: 'whitesmoke' }} value={cliente.id}>Editar</button></td>
-                                    <td><button type="button" className="btn btn-danger" value={cliente.id} onClick={e=>this.excluir(e)}>Excluir</button></td>
+                                    <td><button type="button" className="btn btn-danger" value={cliente.id} onClick={e => this.excluir(e)}>Excluir</button></td>
                                 </tr>
                             )}
 
                         </tbody>
                     </table>
-                        <br /><br /><br /><br />
+                    <br /><br /><br /><br />
                     <h3>Novo Cliente</h3>
                     <form>
 
-                    <div className="form-group">
-                        <label for="inputAddress">Nome</label>
-                        <input type="text" className="form-control" id="name" placeholder="Nome" onChange={this.handleNome} value={this.state.nome}/>
-                    </div>
-
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" className="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleEmail} value={this.state.email}/>
-                        </div>
                         <div className="form-group">
-                            <label for="inputAddress">Telefone</label>
-                            <input type="text" className="form-control" id="name" placeholder="Telefone" onChange={this.handleTelefone} value={this.state.telefone}/>
+                            <label for="inputAddress">Nome</label>
+                            <input type="text" className="form-control" id="name" placeholder="Nome" onChange={e => this.setParam("nome", e.target.value)} />
                         </div>
 
-                    </div>
-                    <br /><br />
-                    <div className="d-flex justify-content-center">
-                        <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
-                            <button type="submit" className="btn btn-success" onClick={this.handleSubmit}>Enviar</button>
+                        <div className="form-row">
+                            <div className="form-group col-md-6">
+                                <label for="inputEmail4">Email</label>
+                                <input type="email" className="form-control" id="inputEmail4" placeholder="Email" onChange={e => this.setParam("email", e.target.value)} />
+                            </div>
+                            <div className="form-group">
+                                <label for="inputAddress">Telefone</label>
+                                <input type="text" className="form-control" id="name" placeholder="Telefone" onChange={e => this.setParam("telefone", e.target.value)} />
+                            </div>
+
                         </div>
-                        <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
-                            <button type="reset" className="btn btn-dark" onClick={(e)=>this.postar(e)}>Limpar</button>
+                        <br /><br />
+                        <div className="d-flex justify-content-center">
+                            <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
+                                <button type="submit" className="btn btn-success" onClick={this.handleSubmit}>Enviar</button>
+                            </div>
+                            <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
+                                <button type="reset" className="btn btn-dark" onClick={(e) => this.postar(e)}>Limpar</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
                     <br /><br />
                 </div>

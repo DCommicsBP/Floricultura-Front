@@ -11,7 +11,7 @@ export default class Formulario extends Component {
             <section>
                 <br /><br />
                 <h3>Novo Usuário</h3>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="inputAddress">Nome</label>
                     <input type="text" class="form-control" id="name" placeholder="Nome" />
                 </div>
@@ -21,26 +21,26 @@ export default class Formulario extends Component {
                         <label for="inputEmail4">Email</label>
                         <input type="email" class="form-control" id="inputEmail4" placeholder="Email" />
                     </div>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label for="inputAddress">Login</label>
                         <input type="text" class="form-control" id="name" placeholder="Login" />
                     </div>
-                    <div class="form-group col-md-6">
+                    <div className="form-group col-md-6">
                         <label for="inputPassword4">Senha</label>
                         <input type="password" class="form-control" id="inputPassword4" placeholder="Senha" />
                     </div>
-                    <div class="form-group col-md-6">
+                    <div className="form-group col-md-6">
                         <label for="inputPassword4">Confirme a Senha</label>
                         <input type="password" class="form-control" id="inputPassword4" placeholder="Confirme a Senha" />
                     </div>
                 </div>
                 <br/><br/>
-                <div class="d-flex justify-content-center">
+                <div className="d-flex justify-content-center">
                     <div style={{ borderStyle:'solid', borderColor:'white', borderWidth:'5px'}}>
-                        <button type="submit" class="btn btn-success">Enviar</button>
+                        <button type="submit" className="btn btn-success">Enviar</button>
                     </div>
                     <div style={{ borderStyle:'solid', borderColor:'white', borderWidth:'5px'}}>
-                        <button type="submit" class="btn btn-dark">Limpar</button>
+                        <button type="submit" className="btn btn-dark">Limpar</button>
                     </div>
                 </div>
                 <br/><br/>

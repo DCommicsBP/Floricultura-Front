@@ -52,7 +52,6 @@ export default class Usuarios extends Component {
             axios.post(`http://localhost:3000/usuario`, { "nome": usuario.nome, "login": usuario.login, "senha": usuario.senha })
                 .then(res => {
                     this.listar();
-
                 })
             }else{
                 return; 

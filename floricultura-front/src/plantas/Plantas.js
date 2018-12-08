@@ -8,15 +8,20 @@ export default class Plantas extends Component{
         super(); 
 
     }
+    
+    state = {
+        "nome":"", 
+        "valor":0, 
+        "id":0, 
+        "quantidade":0
+    }
 
     render(){
         return(
             <section >
-          <Nav /> 
+                <Nav /> 
 
-            <div className="container">
-                <FormularioPlanta/>
-                </div>
+                <Card></Card>
             </section>
         ) 
     }

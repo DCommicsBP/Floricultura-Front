@@ -9,6 +9,16 @@ export default class Clientes extends Component {
     }
     state = { clientes: [], clienteParaEditar: {}, cliente: { nome: "", email: "", telefone: "", } }
 
+    setParam(param, valor) {
+        this.setState({
+            [param]: valor
+        });
+    }
+
+    limpaCampos () {
+        this.setState({ nome: "", email: "", telefone: "" })
+    }
+
     listar() {
         axios.get(`http://localhost:3000/cliente`)
             .then(res => {
@@ -47,12 +57,7 @@ export default class Clientes extends Component {
         debugger;
     }
 
-    setParam(param, valor) {
-        this.setState({
-            [param]: valor
-        });
-    }
-
+    
     handleSubmit = event => {
         event.preventDefault();
 
@@ -62,9 +67,11 @@ export default class Clientes extends Component {
             telefone: this.state.telefone
         };
 
-        this.setState({ nome: "", email: "", telefone: "" })
         axios.post(`http://localhost:3000/cliente`, { "nome": cliente.nome, "email": cliente.email, "telefone": cliente.telefone })
             .then(res => {
+                debugger; 
+                this.setState({ nome: "", email: "", telefone: "" })
+
                 this.listar();
 
             })
@@ -134,7 +141,7 @@ export default class Clientes extends Component {
                                 <button type="submit" className="btn btn-success" onClick={this.handleSubmit}>Enviar</button>
                             </div>
                             <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
-                                <button type="reset" className="btn btn-dark" onClick={(e) => this.postar(e)}>Limpar</button>
+                                <button type="reset" className="btn btn-dark" onReset={this.limpaCampos}>Limpar</button>
                             </div>
                         </div>
                     </form>

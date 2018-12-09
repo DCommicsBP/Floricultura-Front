@@ -15,6 +15,7 @@ export default class Usuarios extends Component {
             [param]: valor
         });
     }
+
     handlePropriedade = e => {
         const valor = e.target.value;
         this.setState({ ["props"]: valor })
@@ -71,6 +72,7 @@ export default class Usuarios extends Component {
                 const usuarios = res.data;
                 this.setState({  usuarios });
             })
+            return this.state.usuarios; 
     }
 
     componentDidMount() {

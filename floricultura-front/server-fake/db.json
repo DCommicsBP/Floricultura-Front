@@ -94,27 +94,11 @@
   ],
   "planta": [
     {
-      "nome": "Planta 02",
+      "nome": "Planta 01",
       "valor": "4",
-      "id": 1,
-      "quantidade": "4444",
-      "imagm": "",
-      "tipo": "",
-      "planta": {},
-      "plantas": [
-        {
-          "nome": "Planta 01",
-          "valor": "4",
-          "id": 1,
-          "quantidade": "444",
-          "imagm": "",
-          "tipo": "",
-          "planta": {},
-          "plantas": [],
-          "plantaParaEditar": {}
-        }
-      ],
-      "plantaParaEditar": {}
+      "quantidade": "45",
+      "tipo": "flor",
+      "id": 1
     }
   ],
   "vendas": [

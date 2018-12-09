@@ -8,40 +8,33 @@ export default class Plantas extends Component {
         super();
     }
     state = { nome: "", valor: "", id: "", quantidade: "", imagm: "", tipo: "", planta: {}, plantas: [], plantaParaEditar: {} }
-
     setParam(param, valor) {
         this.setState({
             [param]: valor
         });
     }
     load() {
-        debugger;
         axios.get("http://localhost:3000/planta").then(res => {
             const plantas = res.data;
             console.log(plantas)
             this.setState({ plantas });
         })
+        return this.state.plantas
+
     }
 
 
     carregar(id) {
-        axios.get("http://localhost:3000/planta/" + id).then(res => {
-            const planta = res.data;
-            this.setState({ planta });
-        })
 
 
     }
 
     adicionarPlanta(planta) {
         debugger;
-        axios.post("http://localhost:3000/planta/", planta).then(
-            (retorno) => this.setState(
-                {
-                    planta: [...this.state.planta, retorno.data]
-                }
-            )
-        );
+        axios.post("http://localhost:3000/planta/", {nome: planta.nome, valor: planta.valor, quantidade:planta.quantidade, imagm: planta.imagem, tipo:planta.tipo}).then(
+            res => {
+                this.listar();
+            })
     }
 
     componentDidMount() {
@@ -54,7 +47,6 @@ export default class Plantas extends Component {
         );
 
     }
-
 
     passValues(planta) {
         debugger;
@@ -113,7 +105,10 @@ export default class Plantas extends Component {
             return <h3>Editar Registro</h3>
         }
     }
-
+    setaTipoPLanta = e=>{
+        debugger; 
+        this.setParam("tipo", e.target.value); 
+    }
     render() {
         return (
             <section >
@@ -136,7 +131,7 @@ export default class Plantas extends Component {
                         <div className="form-row">
                             <div className="form-group col-md-4">
                                 <label for="inputState">Tipo de Planta</label>
-                                <select value={this.state.tipo} onChange={this.handleChange} className="form-control" id="tipo">
+                                <select value={this.state.tipo} onChange={e=>this.setaTipoPLanta(e)} className="form-control" id="tipo">
                                     <option selected>Selecione...</option>
                                     <option value="flor">Flor</option>
                                     <option value="arvore">Árvore</option>

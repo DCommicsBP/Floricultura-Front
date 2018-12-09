@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { platform } from 'os';
 export default class Card extends Component {
     render() {
         return (
@@ -12,7 +11,7 @@ export default class Card extends Component {
                             <div className="card">
                                 <div className="card-body">
                                     <h4 className="card-title">Nome: {planta.nome}</h4>
-                                    <h6 className="card-title">Tipo: Flor </h6>
+                                    <h6 className="card-title">Tipo: {planta.tipo} </h6>
                                     <h6 className="card-title">Valor: {planta.valor} </h6>
                                     <h6 className="card-title">Quantidade: {planta.quantidade} </h6>
                                        <div style={{position:'relative',left:'25%'}}>

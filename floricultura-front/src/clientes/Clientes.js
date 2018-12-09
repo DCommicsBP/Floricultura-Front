@@ -4,10 +4,9 @@ import axios from 'axios'
 export default class Clientes extends Component {
 
     constructor() {
-
         super();
     }
-    state = { clientes: [], clienteParaEditar: {}, cliente: { nome: "", email: "", telefone: "", } }
+    state = { clientes: [], clienteParaEditar: {}, cliente: { nome: "", email: "", telefone: "",endereco:"", id:"" }, nome: "", email: "", telefone: "",endereco:"", id:"" }
 
     setParam(param, valor) {
         this.setState({
@@ -16,7 +15,7 @@ export default class Clientes extends Component {
     }
 
     limpaCampos() {
-        this.setState({ nome: "", email: "", telefone: "" })
+        this.setState({ nome: "", email: "", telefone: "",endereco:"" })
     }
 
     listar() {
@@ -36,9 +35,9 @@ export default class Clientes extends Component {
     }
 
     editar(cliente) {
-
+        debugger; 
         this.setState({
-            clienteParaEditar: cliente
+            cliente
         })
         console.log(cliente)
         debugger;
@@ -59,19 +58,38 @@ export default class Clientes extends Component {
 
 
     handleSubmit = event => {
+        debugger; 
         event.preventDefault();
-
         const cliente = {
+            id: this.state.id,
             nome: this.state.nome,
             email: this.state.email,
-            telefone: this.state.telefone
+            telefone: this.state.telefone, 
+            endereco:this.state.endereco
         };
-
-        axios.post(`http://localhost:3000/cliente`, { "nome": cliente.nome, "email": cliente.email, "telefone": cliente.telefone })
-        .then(res => {
-            this.setState({ nome: "", email: "", telefone: "" })
-            this.listar();
+        
+        if(cliente.id == ""){
+            const novoCliente = {
+                nome: this.state.nome,
+                email: this.state.email,
+                telefone: this.state.telefone, 
+                endereco:this.state.endereco
+            };
+    
+            axios.post(`http://localhost:3000/cliente`, { "nome": novoCliente.nome, "email": novoCliente.email, "telefone": novoCliente.telefone, "endereco":novoCliente.endereco })
+            .then(res => {
+                this.setState({ nome: "", email: "", telefone: "", endereco:"" })
+                this.listar();
+                })
+    
+        }else{
+            
+            axios.put(`http://localhost:3000/cliente/`+ cliente.id, cliente)
+            .then(res => {
+                this.setState({ nome: "", email: "", telefone: "", endereco:"" })
+                this.listar();
             })
+        }
     }
 
 
@@ -79,6 +97,30 @@ export default class Clientes extends Component {
         this.listar();
     }
 
+    passValue(cliente){
+
+            document.getElementById("nome").value = cliente.nome;
+            document.getElementById("endereco").value = cliente.endereco; 
+            document.getElementById("email").value = cliente.email; 
+            document.getElementById("telefone").value = cliente.telefone; 
+            document.getElementById("id").value = cliente.id; 
+
+            this.setParam("id", cliente.id)
+            this.setParam("nome", cliente.nome)
+            this.setParam("email", cliente.email)
+            this.setParam("telefone", cliente.telefone)
+            this.setParam("endereco", cliente.endereco)
+    }
+
+    stateEditPost(param){
+        if(param != ""){
+            return <h3>Editar Cliente</h3>
+        }else{
+            return<h3>Novo Cliente</h3>
+        }
+    }
+   
+   
     render() {
         return (
             <section>
@@ -94,6 +136,7 @@ export default class Clientes extends Component {
                                 <th scope="col">Nome</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Telefone</th>
+                                <th scope="col">Endereco</th>
                                 <th scope="col">Editar</th>
                                 <th scope="col">Excluir</th>
                             </tr>
@@ -102,10 +145,12 @@ export default class Clientes extends Component {
                             {this.state.clientes.map(cliente =>
                                 <tr>
                                     <th scope="row">{cliente.id}</th>
+                                    
                                     <td>{cliente.nome}</td>
                                     <td>{cliente.email}</td>
                                     <td>{cliente.telefone}</td>
-                                    <td><button type="button" className="btn btn-info" style={{ color: 'whitesmoke' }} value={cliente.id}>Editar</button></td>
+                                    <td>{cliente.endereco}</td>
+                                    <td><button type="button" className="btn btn-info" style={{ color: 'whitesmoke' }} value={cliente.id} onClick={e=>this.passValue(cliente)}>Editar</button></td>
                                     <td><button type="button" className="btn btn-danger" value={cliente.id} onClick={e => this.excluir(e)}>Excluir</button></td>
                                 </tr>
                             )}
@@ -113,22 +158,28 @@ export default class Clientes extends Component {
                         </tbody>
                     </table>
                     <br /><br /><br /><br />
-                    <h3>Novo Cliente</h3>
+                    { this.stateEditPost(this.state.id)}
+                    <span id="id">{this.state.id}</span>
                     <form>
 
                         <div className="form-group">
-                            <label for="inputAddress">Nome</label>
-                            <input type="text" className="form-control" id="name" placeholder="Nome" onChange={e => this.setParam("nome", e.target.value)} />
+                            <label for="nome">Nome</label>
+                            <input type="text" className="form-control" id="nome"  placeholder="Nome" onChange={e => this.setParam("nome", e.target.value)} />
+                            
                         </div>
 
                         <div className="form-row">
                             <div className="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input type="email" className="form-control" id="inputEmail4" placeholder="Email" onChange={e => this.setParam("email", e.target.value)} />
+                                <label for="email">Email</label>
+                                <input type="email" className="form-control" id="email"  placeholder="Email" onChange={e => this.setParam("email", e.target.value)} />
                             </div>
                             <div className="form-group">
-                                <label for="inputAddress">Telefone</label>
-                                <input type="text" className="form-control" id="name" placeholder="Telefone" onChange={e => this.setParam("telefone", e.target.value)} />
+                                <label for="telefone">Telefone</label>
+                                <input type="text" className="form-control" id="telefone"  placeholder="Telefone" onChange={e => this.setParam("telefone", e.target.value)} />
+                            </div>
+                            <div className="form-group">
+                                <label for="endereco">Endereco</label>
+                                <input type="text" className="form-control" id="endereco" placeholder="Endereco" onChange={e => this.setParam("endereco", e.target.value)} />
                             </div>
 
                         </div>

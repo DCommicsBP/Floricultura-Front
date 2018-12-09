@@ -49,6 +49,33 @@
       "email": "victor@gmail.com",
       "telefone": "513268162226",
       "id": 5
+    },
+    {
+      "nome": "Daione Caroline Balduzzi Pavan",
+      "email": "dayonne.p@gmail.com",
+      "telefone": "5132681666",
+      "id": 6
+    },
+    {
+      "id": 7,
+      "nome": "Victor Santos Esquici ",
+      "email": "victor@email.com",
+      "telefone": "4343242dd",
+      "endereco": "Novo Endereco ddddd"
+    },
+    {
+      "id": 8,
+      "nome": "Daione ffffff",
+      "email": "dayonne.p@gmail.comfff",
+      "telefone": "5132681666",
+      "endereco": "Estrada Chapéu do Sol, Belém Novo"
+    },
+    {
+      "id": 9,
+      "nome": "nome decente",
+      "email": "email decente",
+      "telefone": "23456",
+      "endereco": "endereco decente"
     }
   ],
   "planta": [
@@ -67,18 +94,26 @@
       "imagem": "../../src/images/Plantas/flor.jpeg"
     },
     {
-      "id": 2,
-      "nome": "planta03",
-      "valor": "3.6",
-      "qunatidade": "2",
-      "imagem": "../../src/images/Plantas/flor.jpeg"
-    },
-    {
       "id": 3,
       "nome": "planta04",
       "valor": "7.6",
       "qunatidade": "1",
       "imagem": "../../src/images/Plantas/flor.jpeg"
+    },
+    {
+      "nome": "planta06",
+      "valor": 5,
+      "quantidade": "2",
+      "imagem": "",
+      "id": 5
+    },
+    {
+      "nome": "planta05",
+      "valor": 3,
+      "quantidade": "1",
+      "imagem": "",
+      "tipo": "flor",
+      "id": 7
     }
   ],
   "vendas": [

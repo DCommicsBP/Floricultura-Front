@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { platform } from 'os';
 export default class Card extends Component {
     render() {
         return (
@@ -15,8 +16,8 @@ export default class Card extends Component {
                                     <h6 className="card-title">Valor: {planta.valor} </h6>
                                     <h6 className="card-title">Quantidade: {planta.quantidade} </h6>
                                        <div style={{position:'relative',left:'25%'}}>
-                                            <button className="btn btn-warning" style={{borderStyle:'solid', borderColor:'white'}}>Editar</button>
-                                            <button className="btn btn-danger" style={{borderStyle:'solid', borderColor:'white'}}   >Excluir</button>
+                                            <button className="btn btn-warning" style={{borderStyle:'solid', borderColor:'white'}} onClick={()=>this.props.onEditar(planta)}>Editar</button>
+                                            <button className="btn btn-danger" style={{borderStyle:'solid', borderColor:'white'}} onClick={()=>this.props.onExcluir(planta)}>Excluir</button>
                                        </div>
                                 </div>
                             </div>

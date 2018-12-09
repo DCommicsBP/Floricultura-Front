@@ -9,6 +9,8 @@ export default class Vendas extends Component {
         return (
             <section >
                 <Nav />
+
+                
             </section>
         )
     }

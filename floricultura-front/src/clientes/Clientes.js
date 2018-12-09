@@ -24,7 +24,8 @@ export default class Clientes extends Component {
                 const clientes = res.data;
                 this.setState({ clientes });
             })
-    }
+    
+        }
 
     carregar(id) {
         axios.get(`http://localhost:3000/cliente/` + id)
@@ -98,7 +99,7 @@ export default class Clientes extends Component {
     }
 
     passValue(cliente){
-
+                debugger;
             document.getElementById("nome").value = cliente.nome;
             document.getElementById("endereco").value = cliente.endereco; 
             document.getElementById("email").value = cliente.email; 
@@ -165,6 +166,7 @@ export default class Clientes extends Component {
                         <div className="form-group">
                             <label for="nome">Nome</label>
                             <input type="text" className="form-control" id="nome"  placeholder="Nome" onChange={e => this.setParam("nome", e.target.value)} />
+                            <input type="text" className="form-control" id="id"  placeholder="Nome"  />
                             
                         </div>
 

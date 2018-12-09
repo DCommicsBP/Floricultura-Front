@@ -17,6 +17,20 @@
       "login": "homer",
       "senha": "homer",
       "id": 3
+    },
+    {
+      "nome": "novo teste de edicao d",
+      "login": "login de edicao ",
+      "senha": "senha",
+      "confirmeSenha": "",
+      "id": 4
+    },
+    {
+      "nome": "minha planta",
+      "login": "DCommicsBP",
+      "senha": "123",
+      "confirmeSenha": "",
+      "id": 5
     }
   ],
   "cliente": [
@@ -73,47 +87,34 @@
     {
       "id": 9,
       "nome": "nome decente",
-      "email": "email decente",
+      "email": "email decente 1",
       "telefone": "23456",
       "endereco": "endereco decente"
     }
   ],
   "planta": [
     {
-      "id": 0,
-      "nome": "planta01",
-      "valor": "5.6",
-      "qunatidade": "5",
-      "imagem": "../../src/images/Plantas/flor.jpeg"
-    },
-    {
+      "nome": "Planta 02",
+      "valor": "4",
       "id": 1,
-      "nome": "planta02",
-      "valor": "4.6",
-      "qunatidade": "5",
-      "imagem": "../../src/images/Plantas/flor.jpeg"
-    },
-    {
-      "id": 3,
-      "nome": "planta04",
-      "valor": "7.6",
-      "qunatidade": "1",
-      "imagem": "../../src/images/Plantas/flor.jpeg"
-    },
-    {
-      "nome": "planta06",
-      "valor": 5,
-      "quantidade": "2",
-      "imagem": "",
-      "id": 5
-    },
-    {
-      "nome": "planta05",
-      "valor": 3,
-      "quantidade": "1",
-      "imagem": "",
-      "tipo": "flor",
-      "id": 7
+      "quantidade": "4444",
+      "imagm": "",
+      "tipo": "",
+      "planta": {},
+      "plantas": [
+        {
+          "nome": "Planta 01",
+          "valor": "4",
+          "id": 1,
+          "quantidade": "444",
+          "imagm": "",
+          "tipo": "",
+          "planta": {},
+          "plantas": [],
+          "plantaParaEditar": {}
+        }
+      ],
+      "plantaParaEditar": {}
     }
   ],
   "vendas": [

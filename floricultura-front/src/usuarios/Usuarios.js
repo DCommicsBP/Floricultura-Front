@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
-import Lista from './Lista';
-import Formulario from './Formulario';
 import Nav from '../commons/nav/Nav';
 import axios from 'axios';
-import { unwatchFile } from 'fs';
 export default class Usuarios extends Component {
     constructor(props) {
 
         super(props);
     }
     state = {
-        "usuarios": [], "nome": "", "login": "", "senha": "", "confirmeSenha": ""
+        usuarios: [], nome: "", login: "", senha: "", confirmeSenha: "", id:"", usuario:{nome: "", login: "", senha: "", confirmeSenha: "", id:""}
     }
 
     setParam(param, valor) {
-        debugger;
         this.setState({
             [param]: valor
-        })
+        });
     }
-
-
     handlePropriedade = e => {
         const valor = e.target.value;
         this.setState({ ["props"]: valor })
@@ -34,7 +28,7 @@ export default class Usuarios extends Component {
         if (usuario.senha == "" || usuario.confirmeSenha == "" || usuario.login == "" || usuario.nome == "") {
             return false;
         }
-        return true; 
+        return true;
     }
 
     handleSubmit = event => {
@@ -44,26 +38,38 @@ export default class Usuarios extends Component {
             nome: this.state.nome,
             login: this.state.login,
             senha: this.state.senha,
-            confirmeSenha: this.state.confirmeSenha
+            confirmeSenha: this.state.confirmeSenha, 
+            id: this.state.id
         };
 
-        if (this.verificacao(usuario)) {
-            this.setState({ nome: "", login: "", senha: "", confirmeSenha: "" })
-            axios.post(`http://localhost:3000/usuario`, { "nome": usuario.nome, "login": usuario.login, "senha": usuario.senha })
-                .then(res => {
-                    this.listar();
-                })
-            }else{
-                return; 
+        if(usuario.id==""){
+            if (this.verificacao(usuario)) {
+                this.setState({ nome: "", login: "", senha: "", confirmeSenha: "" })
+                axios.post(`http://localhost:3000/usuario`, { "nome": usuario.nome, "login": usuario.login, "senha": usuario.senha })
+                    .then(res => {
+                        this.listar();
+                    })
+            } else {
+                return;
             }
-    
+
+        }else{
+            axios.put(`http://localhost:3000/usuario/`+usuario.id,usuario)
+                    .then(res => {
+                        this.listar();
+                    })
+
         }
+
+        
+
+    }
+
     listar() {
         axios.get(`http://localhost:3000/usuario`)
             .then(res => {
-
                 const usuarios = res.data;
-                this.setState({ "usuarios": usuarios });
+                this.setState({  usuarios });
             })
     }
 
@@ -85,15 +91,38 @@ export default class Usuarios extends Component {
 
         debugger;
     }
+
+    passValues(usuario){
+        debugger; 
+        document.getElementById("id").value = usuario.id; 
+        document.getElementById("nome").value = usuario.nome; 
+        document.getElementById("senha").value = usuario.senha; 
+        document.getElementById("senha02").value = usuario.senha02; 
+        document.getElementById("login").value = usuario.login; 
+
+        this.setParam("id", usuario.id)
+        this.setParam("nome", usuario.nome)
+        this.setParam("senha", usuario.senha)
+        this.setParam("senha02", usuario.senha02)
+        this.setParam("login", usuario.login)
+
+    }
+    
+    idVerifica(prop){
+        if(prop == "") return <h3>Novo Usuário</h3>
+        if(prop != "") return <h3>Editar Usuário</h3>
+    }
+
+
     render() {
         return (
             <section >
                 <Nav />
 
-                <div className="container">
+                <div className="container"  style={{position:"relative", top:"100px"}}>
 
-
-                    <div className="row" style={this.titleStyle}>
+                
+                    <div className="row" >
                         <h1>Controle de Usuários</h1>
                     </div>
                     <table className="table">
@@ -102,7 +131,6 @@ export default class Usuarios extends Component {
                                 <th scope="col">#</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Login</th>
-                                <th scope="col">Senha</th>
                                 <th scope="col">Editar</th>
                                 <th scope="col">Excluir</th>
                             </tr>
@@ -114,8 +142,7 @@ export default class Usuarios extends Component {
                                     <th scope="row">1</th>
                                     <td>{usuario.nome}</td>
                                     <td>{usuario.login}</td>
-                                    <td>{usuario.senha}</td>
-                                    <td><button type="button" className="btn btn-warning" style={{ backgroundColor: 'orange', color: 'whitesmoke' }}>Editar</button></td>
+                                    <td><button type="button" className="btn btn-info" style={{ backgroundColor: 'orange', color: 'whitesmoke' }} value={usuario.id} onClick={e=>this.passValues(usuario)}>Editar</button></td>
                                     <td><button type="button" className="btn btn-danger" onClick={e => this.excluir(e)} value={usuario.id}>Excluir</button></td>
                                 </tr>
                             )}
@@ -124,21 +151,14 @@ export default class Usuarios extends Component {
                     </table>
 
                     <br /><br />
-                    <button className="btn btn-primary">
-                        Adicionar novo Usuario
-           </button>
-                    <br /><br />
-                    <h3>Novo Usuário</h3>
+                    {this.idVerifica(this.state.id)}
+                    <span id="id"></span>
                     <div className="form-group">
                         <label htmlFor="nome">Nome</label>
-                        <input type="text" className="form-control" placeholder="Nome" value={this.state.nome} onChange={e => this.setParam("nome", e.target.value)} />
+                        <input type="text" className="form-control" id="nome" placeholder="Nome" value={this.state.nome} onChange={e => this.setParam("nome", e.target.value)} />
                     </div>
 
                     <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" className="form-control" id="email" placeholder="Email" onChange={e => this.setParam("email", e.target.value)} />
-                        </div>
                         <div className="form-group">
                             <label htmlFor="login">Login</label>
                             <input type="text" className="form-control" id="login" placeholder="Login" onChange={e => this.setParam("login", e.target.value)} />
@@ -163,8 +183,6 @@ export default class Usuarios extends Component {
                     </div>
                     <br /><br />
                 </div>
-
-
             </section>
 
         )

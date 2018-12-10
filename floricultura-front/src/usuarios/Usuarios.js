@@ -67,12 +67,17 @@ export default class Usuarios extends Component {
     }
 
     listar() {
+        let usuarios;
         axios.get(`http://localhost:3000/usuario`)
             .then(res => {
-                const usuarios = res.data;
+                usuarios = res.data;
                 this.setState({  usuarios });
+                this.setParam("usuarios", usuarios)
+
             })
-            return this.state.usuarios; 
+            debugger;   
+            return usuarios; 
+
     }
 
     componentDidMount() {

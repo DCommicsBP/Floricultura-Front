@@ -16,7 +16,6 @@ export default class Plantas extends Component {
     load() {
         axios.get("http://localhost:3000/planta").then(res => {
             const plantas = res.data;
-            console.log(plantas)
             this.setState({ plantas });
         })
         return this.state.plantas

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Nav from '../commons/nav/Nav';
 import axios from 'axios'
+import ClienteService from './ClienteService'
 export default class Clientes extends Component {
-
     constructor() {
         super();
     }
     state = { clientes: [], clienteParaEditar: {}, cliente: { nome: "", email: "", telefone: "", endereco: "", id: "" }, nome: "", email: "", telefone: "", endereco: "", id: "" }
-
+    cs = new ClienteService(); 
     setParam(param, valor) {
         this.setState({
             [param]: valor
@@ -19,13 +19,17 @@ export default class Clientes extends Component {
     }
 
     listar() {
+        let clientes; 
         axios.get(`http://localhost:3000/cliente`)
-            .then(res => {
-                const clientes = res.data;
-                this.setState({ clientes });
-            })
-        return this.state.clientes;
-    }
+        .then(res => {
+             clientes = res.data;
+             this.setState({clientes})
+            
+        })
+        return clientes
+ 
+
+         }
 
     carregar(id) {
         axios.get(`http://localhost:3000/cliente/` + id)
@@ -56,7 +60,6 @@ export default class Clientes extends Component {
 
         debugger;
     }
-
 
     handleSubmit = event => {
         debugger;
@@ -93,7 +96,6 @@ export default class Clientes extends Component {
         }
     }
 
-
     componentDidMount = () => {
         this.listar();
     }
@@ -121,7 +123,6 @@ export default class Clientes extends Component {
         }
     }
 
-
     render() {
         return (
             <section>
@@ -129,7 +130,7 @@ export default class Clientes extends Component {
                 <div className="container">
                     <div className="row" style={this.titleStyle}>
                         <h1>Cadastro de Clientes</h1>
-                    </div>
+                    </div>a
                     <table class="table">
                         <thead>
                             <tr>

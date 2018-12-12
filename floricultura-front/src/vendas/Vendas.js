@@ -4,27 +4,65 @@ import Plantas from '../plantas/Plantas';
 import Clientes from '../clientes/Clientes';
 import Usuarios from '../usuarios/Usuarios';
 import axios from 'axios'; 
-import ClienteService from '../clientes/ClienteService'
 
 export default class Vendas extends Component {
     constructor(props) {
         super(props);
         
     }
-        cs = new ClienteService(); 
-        plantas = new Plantas();
-        clientes = new Clientes();
-        usuarios = new Usuarios();
-    
+ 
     state = {
-        cliente: {}, clientes:this.clientes.listar(),
-        usuario: {}, usuarios:this.usuarios.listar(),
-        planta: {}, plantas: this.plantas.load(),
+        cliente: {}, clientes:[],
+        usuario: {}, usuarios:[],
+        planta: {}, plantas: [],
         pagamento: "",
         compra: Date.now(),
         entrega: "",
         dataPrvista: (Date.now() + 7),
-        id: ""
+        id: "", 
+        vendas:[]
+    }
+
+    loadClientes(){
+        axios.get(`http://localhost:3000/cliente/`)
+            .then(res => {
+                const clientes = res.data;
+                this.setState({ clientes });
+            })
+
+    }
+
+    loadUsuarios(){
+        
+        axios.get(`http://localhost:3000/usuario/`)
+            .then(res => {
+                const usuarios = res.data;
+                this.setState({  usuarios });
+            })
+
+
+    }
+
+    loadPlantas(){
+        axios.get(`http://localhost:3000/planta/`)
+            .then(res => {
+                const plantas = res.data;
+                console.log('Plantas==>', plantas)
+                this.setState({ plantas });
+            })
+
+
+    }
+
+    loadvendas(){
+        axios.get(`http://localhost:3000/vendas/`)
+            .then(res => {
+                const vendas = res.data;
+                console.log('Vendas ===>', vendas);
+                this.setState({ vendas });
+            })
+
+
     }
 
     render() {

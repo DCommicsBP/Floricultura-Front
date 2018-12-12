@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import Nav from '../commons/nav/Nav';
 import axios from 'axios'
-import ClienteService from './ClienteService'
 export default class Clientes extends Component {
     constructor() {
         super();
     }
     state = { clientes: [], clienteParaEditar: {}, cliente: { nome: "", email: "", telefone: "", endereco: "", id: "" }, nome: "", email: "", telefone: "", endereco: "", id: "" }
-    cs = new ClienteService(); 
     setParam(param, valor) {
         this.setState({
             [param]: valor
@@ -26,7 +24,7 @@ export default class Clientes extends Component {
              this.setState({clientes})
             
         })
-        return clientes
+        return clientes;
  
 
          }
@@ -130,7 +128,7 @@ export default class Clientes extends Component {
                 <div className="container">
                     <div className="row" style={this.titleStyle}>
                         <h1>Cadastro de Clientes</h1>
-                    </div>a
+                    </div>
                     <table class="table">
                         <thead>
                             <tr>

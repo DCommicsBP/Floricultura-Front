@@ -19,150 +19,35 @@
       "id": 3
     },
     {
-      "nome": "novo teste de edicao d",
-      "login": "login de edicao ",
-      "senha": "senha",
-      "confirmeSenha": "",
+      "nome": "Maggie Simpson",
+      "login": "maggie",
+      "senha": "maggie",
       "id": 4
-    },
-    {
-      "nome": "minha planta",
-      "login": "DCommicsBP",
-      "senha": "123",
-      "confirmeSenha": "",
-      "id": 5
-    },
-    {
-      "nome": "Daione Caroline Balduzzi Pavan Linda *.*",
-      "email": "dayonne.p@gmail.com",
-      "telefone": "5132681666",
-      "id": 6
     }
   ],
-  "cliente": [
-    {
-      "nome": "Daione Caroline Balduzzi Pavan",
-      "email": "dayonne.p@gmail.com",
-      "telefone": "5132681666",
-      "id": 1
-    },
-    {
-      "nome": "Bruna Pavan Faccion",
-      "email": "bpavan@gmail.com",
-      "telefone": "",
-      "id": 2
-    },
-    {
-      "nome": "Rafael dos Santos Fronteira",
-      "email": "fronteira@gmail.com",
-      "telefone": "5133445566",
-      "id": 3
-    },
-    {
-      "nome": "Renata Piazera Cardoso",
-      "email": "renata@gmail.com",
-      "telefone": "5123456789",
-      "id": 4
-    },
-    {
-      "nome": "Victor Santos Esquici",
-      "email": "victor@gmail.com",
-      "telefone": "513268162226",
-      "id": 5
-    },
-    {
-      "nome": "Daione Caroline Balduzzi Pavan",
-      "email": "dayonne.p@gmail.com",
-      "telefone": "5132681666",
-      "id": 6
-    },
-    {
-      "id": 7,
-      "nome": "Victor Santos Esquici ",
-      "email": "victor@email.com",
-      "telefone": "4343242dd",
-      "endereco": "Novo Endereco ddddd"
-    },
-    {
-      "id": 8,
-      "nome": "Daione ffffff",
-      "email": "dayonne.p@gmail.comfff",
-      "telefone": "5132681666",
-      "endereco": "Estrada Chapéu do Sol, Belém Novo"
-    },
-    {
-      "id": 9,
-      "nome": "nome decente",
-      "email": "email decente 1",
-      "telefone": "23456",
-      "endereco": "endereco decente"
-    },
-    {
-      "nome": "Daione Caroline Balduzzi Pavan Linda *.*",
-      "email": "dayonne.p@gmail.com",
-      "telefone": "5132681666",
-      "id": 10
-    },
-    {
-      "nome": "Daione Caroline Balduzzi Pavan Linda *.*ffffffff",
-      "email": "dayonne.p@gmail.com",
-      "telefone": "5132681666",
-      "id": 11
-    }
-  ],
+  "cliente": [],
   "planta": [
     {
       "nome": "Planta 01",
       "valor": "4",
-      "quantidade": "45",
+      "quantidade": "2",
       "tipo": "flor",
       "id": 1
-    }
-  ],
-  "vendas": [
-    {
-      "id": 0,
-      "planta": {
-        "id": 3,
-        "nome": "planta04",
-        "valor": "7.6",
-        "qunatidade": "1",
-        "imagem": "../../src/images/Plantas/flor.jpeg"
-      },
-      "cliente": {
-        "nome": "Daione Caroline Balduzzi Pavan",
-        "email": "dayonne.p@gmail.com",
-        "telefone": "5132681666",
-        "id": 1
-      },
-      "usuario": {
-        "nome": "Lisa Simpson",
-        "login": "lisa",
-        "senha": "lisa",
-        "id": 2
-      }
     },
     {
-      "planta": {
-        "id": 3,
-        "nome": "planta04",
-        "valor": "7.6",
-        "qunatidade": "1",
-        "imagem": "../../src/images/Plantas/flor.jpeg"
-      },
-      "cliente": {
-        "nome": "Daione Caroline Balduzzi Pavan",
-        "email": "dayonne.p@gmail.com",
-        "telefone": "5132681666",
-        "id": 1
-      },
-      "usuario": {
-        "nome": "Lisa Simpson",
-        "login": "lisa",
-        "senha": "lisa",
-        "id": 2
-      },
-      "id": 1
+      "nome": "Planta 02",
+      "valor": "44",
+      "quantidade": "8",
+      "tipo": "arvore",
+      "id": 2
+    },
+    {
+      "nome": "Planta 03",
+      "valor": "33",
+      "quantidade": "12",
+      "tipo": "flor",
+      "id": 3
     }
-  ]
+  ],
+  "vendas": []
 }

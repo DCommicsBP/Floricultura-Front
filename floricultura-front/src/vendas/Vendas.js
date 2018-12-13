@@ -24,9 +24,11 @@ export default class Vendas extends Component {
     }
 
     loadClientes(){
+
         axios.get(`http://localhost:3000/cliente/`)
             .then(res => {
                 const clientes = res.data;
+                console.log('Clientes==> ', clientes)
                 this.setState({ clientes });
             })
 
@@ -65,18 +67,24 @@ export default class Vendas extends Component {
 
     }
 
-    render() {
-        console.log(this.props)
+    componentDidMount (){
+        this.loadClientes(); 
+        this.loadPlantas(); 
+        this.loadUsuarios(); 
+        this.loadvendas(); 
+    }
 
+    render() {
+       
         return (
             <section >
                 <Nav />
 
                 <ul>
-                    <li>
-
-                    </li>
-                </ul>
+                    {this.state.clientes.map(cliente=>
+                        <li >{cliente.nome}</li>
+                    )}
+                 </ul>
             </section>
         )
     }

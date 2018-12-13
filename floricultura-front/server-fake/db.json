@@ -25,7 +25,22 @@
       "id": 4
     }
   ],
-  "cliente": [],
+  "cliente": [
+    {
+      "nome": "Novo Cliente",
+      "email": "dayonne@hotmail.commiguel123",
+      "telefone": "sdads",
+      "endereco": "dasd",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "nome": "sadsb vcbbc",
+      "email": "dasdasd",
+      "telefone": "dasdd",
+      "endereco": "adasd"
+    }
+  ],
   "planta": [
     {
       "nome": "Planta 01",

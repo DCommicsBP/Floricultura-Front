@@ -165,13 +165,14 @@ export default class Clientes extends Component {
                         <div className="form-group">
                             <label for="nome">Nome</label>
                             <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={e => this.setParam("nome", e.target.value)} />
-                            <input type="text" className="form-control" id="id" placeholder="Nome" />
+                            <input type="text" className="form-control" id="id" placeholder="Nome" style={{display:'none'}}/>
 
                         </div>
 
                         <div className="form-row">
                             <div className="form-group col-md-6">
                                 <label for="email">Email</label>
+                                
                                 <input type="email" className="form-control" id="email" placeholder="Email" onChange={e => this.setParam("email", e.target.value)} />
                             </div>
                             <div className="form-group">

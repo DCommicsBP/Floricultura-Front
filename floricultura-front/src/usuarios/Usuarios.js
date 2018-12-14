@@ -22,7 +22,6 @@ export default class Usuarios extends Component {
     }
 
     verificacao(usuario) {
-        debugger;
         if (usuario.senha != usuario.confirmeSenha) {
             return false;
         }
@@ -34,7 +33,6 @@ export default class Usuarios extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        debugger;
         const usuario = {
             nome: this.state.nome,
             login: this.state.login,
@@ -94,8 +92,6 @@ export default class Usuarios extends Component {
                 console.log(res);
                 console.log(res.data);
             })
-
-        debugger;
     }
 
     passValues(usuario){

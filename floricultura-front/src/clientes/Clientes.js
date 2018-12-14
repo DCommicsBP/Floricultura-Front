@@ -18,7 +18,7 @@ export default class Clientes extends Component {
 
     listar() {
         let clientes; 
-        axios.get(`http://localhost:3000/cliente`)
+        axios.get(`http://localhost:8080/cliente/`)
         .then(res => {
              clientes = res.data;
              this.setState({clientes})
@@ -30,7 +30,7 @@ export default class Clientes extends Component {
          }
 
     carregar(id) {
-        axios.get(`http://localhost:3000/cliente/` + id)
+        axios.get(`http://localhost:8080/cliente/` + id)
             .then(res => {
                 const clientes = res.data;
                 this.setState({ clientes });
@@ -49,7 +49,7 @@ export default class Clientes extends Component {
 
     excluir(e) {
         e.preventDefault();
-        axios.delete(`http://localhost:3000/cliente/` + e.target.value)
+        axios.delete(`http://localhost:8080/cliente/` + e.target.value)
             .then(res => {
                 this.listar();
                 console.log(res);
@@ -78,7 +78,7 @@ export default class Clientes extends Component {
                 endereco: this.state.endereco
             };
 
-            axios.post(`http://localhost:3000/cliente`, { "nome": novoCliente.nome, "email": novoCliente.email, "telefone": novoCliente.telefone, "endereco": novoCliente.endereco })
+            axios.post(`http://localhost:8080/cliente/`, { "nome": novoCliente.nome, "email": novoCliente.email, "telefone": novoCliente.telefone, "endereco": novoCliente.endereco })
                 .then(res => {
                     this.setState({ nome: "", email: "", telefone: "", endereco: "" })
                     this.listar();
@@ -86,7 +86,7 @@ export default class Clientes extends Component {
 
         } else {
 
-            axios.put(`http://localhost:3000/cliente/` + cliente.id, cliente)
+            axios.put(`http://localhost:8080/cliente/` + cliente.id, cliente)
                 .then(res => {
                     this.setState({ nome: "", email: "", telefone: "", endereco: "" })
                     this.listar();
@@ -165,8 +165,7 @@ export default class Clientes extends Component {
                         <div className="form-group">
                             <label for="nome">Nome</label>
                             <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={e => this.setParam("nome", e.target.value)} />
-                            <input type="text" className="form-control" id="id" placeholder="Nome" />
-
+                          
                         </div>
 
                         <div className="form-row">

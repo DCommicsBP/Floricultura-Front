@@ -14,7 +14,7 @@ export default class Plantas extends Component {
         });
     }
     load() {
-        axios.get("http://localhost:3000/planta").then(res => {
+        axios.get("http://localhost:8080/planta/").then(res => {
             const plantas = res.data;
             this.setState({ plantas });
         })
@@ -30,7 +30,7 @@ export default class Plantas extends Component {
 
     adicionarPlanta(planta) {
         debugger;
-        axios.post("http://localhost:3000/planta/", {nome: planta.nome, valor: planta.valor, quantidade:planta.quantidade, imagm: planta.imagem, tipo:planta.tipo}).then(
+        axios.post("http://localhost:8080/planta/", {nome: planta.nome, valor: planta.valor, quantidade:planta.quantidade, imagm: planta.imagem, tipo:planta.tipo}).then(
             res => {
                 this.listar();
             })
@@ -41,7 +41,7 @@ export default class Plantas extends Component {
     }
 
     excluir(planta) {
-        axios.delete("http://localhost:3000/planta/" + planta.id).then(
+        axios.delete("http://localhost:8080/planta/" + planta.id).then(
             () => this.load()
         );
 
@@ -76,7 +76,7 @@ export default class Plantas extends Component {
             this.adicionarPlanta(planta)
 
         } else {
-            axios.put(`http://localhost:3000/planta/` + planta.id, planta)
+            axios.put(`http://localhost:8080/planta/` + planta.id, planta)
                 .then(res => {
                     this.listar();
                 })
@@ -93,7 +93,7 @@ export default class Plantas extends Component {
 
     confirmarEdicao(planta) {
         debugger;
-        axios.put("http://localhost:3000/planta" + planta.id, planta).then(
+        axios.put("http://localhost:8080/planta/" + planta.id, planta).then(
             () => this.load()
         );
     }

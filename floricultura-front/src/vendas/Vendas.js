@@ -24,7 +24,7 @@ export default class Vendas extends Component {
     }
 
     loadClientes(){
-        axios.get(`http://localhost:3000/cliente/`)
+        axios.get(`http://localhost:8080/cliente/`)
             .then(res => {
                 const clientes = res.data;
                 this.setState({ clientes });
@@ -34,7 +34,7 @@ export default class Vendas extends Component {
 
     loadUsuarios(){
         
-        axios.get(`http://localhost:3000/usuario/`)
+        axios.get(`http://localhost:8080/usuario/`)
             .then(res => {
                 const usuarios = res.data;
                 this.setState({  usuarios });
@@ -44,7 +44,7 @@ export default class Vendas extends Component {
     }
 
     loadPlantas(){
-        axios.get(`http://localhost:3000/planta/`)
+        axios.get(`http://localhost:8080/planta/`)
             .then(res => {
                 const plantas = res.data;
                 console.log('Plantas==>', plantas)
@@ -55,7 +55,7 @@ export default class Vendas extends Component {
     }
 
     loadvendas(){
-        axios.get(`http://localhost:3000/vendas/`)
+        axios.get(`http://localhost:8080/vendas/`)
             .then(res => {
                 const vendas = res.data;
                 console.log('Vendas ===>', vendas);

@@ -86,7 +86,7 @@ export default class Vendas extends Component {
                     )}
                  </ul>
             </section>
-        )
+        )   
     }
 
 }

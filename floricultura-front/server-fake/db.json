@@ -1,44 +1,19 @@
 {
   "usuario": [
     {
-      "nome": "Bart Simpson",
-      "login": "bart",
-      "senha": "bart",
+      "nome": "sadsada",
+      "login": "asdsad",
+      "senha": "123456",
       "id": 1
-    },
-    {
-      "nome": "Lisa Simpson",
-      "login": "lisa",
-      "senha": "lisa",
-      "id": 2
-    },
-    {
-      "nome": "Homer Simpson",
-      "login": "homer",
-      "senha": "homer",
-      "id": 3
-    },
-    {
-      "nome": "Maggie Simpson",
-      "login": "maggie",
-      "senha": "maggie",
-      "id": 4
     }
   ],
   "cliente": [
     {
-      "nome": "Novo Cliente",
-      "email": "dayonne@hotmail.commiguel123",
-      "telefone": "sdads",
-      "endereco": "dasd",
+      "nome": "cxzc",
+      "email": "fsdfsd",
+      "telefone": "dfsdf",
+      "endereco": "czxcsdfsdfs",
       "id": 1
-    },
-    {
-      "id": 2,
-      "nome": "sadsb vcbbc",
-      "email": "dasdasd",
-      "telefone": "dasdd",
-      "endereco": "adasd"
     }
   ],
   "planta": [
@@ -62,6 +37,20 @@
       "quantidade": "12",
       "tipo": "flor",
       "id": 3
+    },
+    {
+      "nome": "Planta 04",
+      "valor": "5",
+      "quantidade": "5",
+      "tipo": "arvore",
+      "id": 4
+    },
+    {
+      "nome": "Planta 04",
+      "valor": "5",
+      "quantidade": "5",
+      "tipo": "arvore",
+      "id": 5
     }
   ],
   "vendas": []

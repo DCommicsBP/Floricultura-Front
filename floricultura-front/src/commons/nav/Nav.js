@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-
+import evergreen from '../../images/nav/evergreen.jpg'; 
 import React, { Component } from 'react';
 export default class Nav extends Component {
   constructor() {
@@ -34,7 +34,7 @@ export default class Nav extends Component {
 
             </ul>
           </div>
-          <img src={require('../../images/nav/evergreen.jpg')} style={{ width: '200px', height: '100px' }} />
+          <img src={evergreen} style={{ width: '200px', height: '100px' }} />
 
         </nav>
       </section>

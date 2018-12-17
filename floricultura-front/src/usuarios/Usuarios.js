@@ -43,10 +43,11 @@ export default class Usuarios extends Component {
             id: this.state.id
         };
 
+            let teste = { "nome": usuario.nome, "login": usuario.login, "senha": usuario.senha }
         if(usuario.id==""){
             if (this.verificacao(usuario)) {
                 this.setState({ nome: "", login: "", senha: "", confirmeSenha: "" })
-                axios.post(`http://localhost:3000/usuario`, { "nome": usuario.nome, "login": usuario.login, "senha": usuario.senha })
+                axios.post(`http://localhost:8080/usuario/`, teste)
                     .then(res => {
                         this.listar();
                     })
@@ -55,20 +56,16 @@ export default class Usuarios extends Component {
             }
 
         }else{
-            axios.put(`http://localhost:3000/usuario/`+usuario.id,usuario)
+            axios.put(`http://localhost:8080/usuario/`+usuario.id,usuario)
                     .then(res => {
                         this.listar();
                     })
-
-        }
-
-        
-
+            }
     }
 
     listar() {
         let usuarios;
-        axios.get(`http://localhost:3000/usuario`)
+        axios.get(`http://localhost:8080/usuario/`)
             .then(res => {
                 usuarios = res.data;
                 this.setState({  usuarios });
@@ -77,7 +74,6 @@ export default class Usuarios extends Component {
             })
             debugger;   
             return usuarios; 
-
     }
 
     componentDidMount() {
@@ -88,7 +84,7 @@ export default class Usuarios extends Component {
         debugger;
         e.preventDefault();
         let value = e.target.value;
-        var url = `http://localhost:3000/usuario/${value}`;
+        var url = `http://localhost:8080/usuario/${value}`;
         axios.delete(url)
             .then(res => {
                 this.listar();

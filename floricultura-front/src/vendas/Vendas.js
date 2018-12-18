@@ -148,12 +148,11 @@ export default class Vendas extends Component {
         }
 
         let quantidade = 0; 
+        let plantas = this.state.venda.plantas.map(planta=>{
+            quantidade = planta.quantidade
+        }); 
         let tot = 0; 
-        this.state.venda.plantas.map(planta=>{
-            quantidade+=planta.quantidade; 
-            tot=planta.valor;
-        })
-     
+        debugger; 
         let obj = this.verificaDisponibilidade(novaVenda.quantidadeSolicitada,quantidade, tot);
         
         if(obj.flag){
@@ -162,11 +161,11 @@ export default class Vendas extends Component {
                 cliente: this.state.venda.cliente,
                 plantas: this.state.venda.plantas,
                 pagamento:this.state.pagamento, 
-                quantidade: obj.quantidade,
+                quantidade: obj.novaQuantidade,
                 valorTotal: obj.valor
             }
     
-            novaVenda.plantas[0].quantidade = this.state.quantidade;
+            novaVenda.plantas[0].quantidade = quantidade;
             this.enviar(novaVenda);
 
 

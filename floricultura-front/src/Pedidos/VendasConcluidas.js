@@ -43,6 +43,7 @@ export default class VendasConcluidas extends Component{
                             <div class="card" style={{width: "18rem"}}>
                                 <div class="card-body">
                                     <h5 class="card-title">Cliente</h5>
+                                    ID: {venda.cliente.id}<br/>
                                     Nome: {venda.cliente.nome}<br/>
                                     Endereco: {venda.cliente.endereco}<br/>
                                     Email: {venda.cliente.endereco}<br/>

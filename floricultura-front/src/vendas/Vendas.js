@@ -17,12 +17,40 @@ export default class Vendas extends Component {
             dataPrevista: (Date.now() + 7),
             id: "",
             vendas: [], 
-            venda: { id: "", cliente: {}, usuario: {}, plantas: [], pagamento: "", compra: "", entrega: "", dataPrevista: "" }
+            venda: { id: "", cliente: {}, usuario: {}, plantas: [], pagamento: "", compra: "", entrega: "", dataPrevista: "", quantidadeSolicitada:"", pagamento:"", valorTotal:""},
+            quantidadeSolicitada:"",
+            valorTotal:"", 
+            quantidade:""
         }
     }
 
-    setProp(chave, valor) {
-        debugger;
+
+    verificaDisponibilidade(quantidadeSolicitada, quantidade, valor){
+        debugger; 
+        if(quantidade < quantidadeSolicitada){
+            alert("Você solicitou quantidade a mais que o disponível")
+            return false; 
+        }
+        if(quantidadeSolicitada<0){
+            alert('Você solicitou quantidade inválida'); 
+            return false; 
+        }
+        if(quantidadeSolicitada ==""){
+            alert('Você não solicitou uma quantidade')
+            return false; 
+        }
+        
+        let novaQuantidade = quantidade - quantidadeSolicitada; 
+        this.setParam("quantidade",novaQuantidade);
+        
+        valor*=quantidadeSolicitada; 
+
+
+        return {flag: true, novaQuantidade: novaQuantidade, valor:valor}; 
+    }
+
+
+    setParam(chave, valor) {
         this.setState({
             [chave]: valor
         })
@@ -111,17 +139,42 @@ export default class Vendas extends Component {
     }
 
     setVenda = (e) => {
-        const novaVenda = {
+        let novaVenda = {
             usuario: this.state.venda.usuario,
             cliente: this.state.venda.cliente,
             plantas: this.state.venda.plantas,
-            pagamento: "",
-            compra: Date.now(),
-            entrega: Date.now(),
-            dataPrevista: Date.now()
+            pagamento:this.state.pagamento, 
+            quantidadeSolicitada: this.state.quantidadeSolicitada
         }
 
-        this.enviar(novaVenda);
+        let quantidade = 0; 
+        let tot = 0; 
+        this.state.venda.plantas.map(planta=>{
+            quantidade+=planta.quantidade; 
+            tot=planta.valor;
+        })
+     
+        let obj = this.verificaDisponibilidade(novaVenda.quantidadeSolicitada,quantidade, tot);
+        
+        if(obj.flag){
+            novaVenda = {
+                usuario: this.state.venda.usuario,
+                cliente: this.state.venda.cliente,
+                plantas: this.state.venda.plantas,
+                pagamento:this.state.pagamento, 
+                quantidade: obj.quantidade,
+                valorTotal: obj.valor
+            }
+    
+            novaVenda.plantas[0].quantidade = this.state.quantidade;
+            this.enviar(novaVenda);
+
+
+            alert('Compra realizada com sucesso!');
+
+        }else{
+            alert('Não foi possível realizar a sua compra. '); 
+        }
     }
 
     render = () => {
@@ -151,6 +204,19 @@ export default class Vendas extends Component {
                         {this.state.plantas.map(planta =>
                             <option value={JSON.stringify(planta)}>Nome: {planta.nome} - Valor: {planta.valor} R$ - Quantidade: {planta.quantidade}</option>
                         )}
+                    </select>
+                    <span>{this.state.valorCompra}</span>
+                    <h3>Quantidade solicitada</h3>
+
+                    <input type="text" className="form-control col-md-4" id="quantidadeSolicitada" placeholder="Nome" onChange={e => this.setParam("quantidadeSolicitada", e.target.value)} required />
+
+                    <h3>Forma de Pagamento</h3>
+        
+                    <select className="form-control form-control col-md-6" onChange={e => this.setParam("pagamento", e.target.value)}>
+                        <option disabled selected>Selecione</option>
+                        <option value="aVista">A Vista</option>
+                        <option value="aPrazo">Prazo</option>
+                        <option value="cartao">Cartão</option>
                     </select>
                     <button onClick={e => this.setVenda(e)}>enviar</button>
                 </div>

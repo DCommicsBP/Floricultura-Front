@@ -32,6 +32,15 @@ export default class Nav extends Component {
                 <Link className="nav-link" to="/vendas">Vendas</Link>
               </li>
 
+              <li className="nav-item active">
+                <Link className="nav-link" to="/vendasConcluidas">Vendas Concluidas</Link>
+              </li>
+
+                <li className="nav-item active">
+                <Link className="nav-link" to="/vendasPendentes">Vendas Em Aberto</Link>
+              </li>
+
+
             </ul>
           </div>
           <img src={evergreen} style={{ width: '200px', height: '100px' }} />

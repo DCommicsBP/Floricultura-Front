@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Nav from '../commons/nav/Nav';
 import axios from 'axios'
+import { Alert } from 'reactstrap';
 export default class Clientes extends Component {
     constructor() {
         super();
@@ -12,22 +13,19 @@ export default class Clientes extends Component {
         });
     }
 
-    limpaCampos() {
-        this.setState({ nome: "", email: "", telefone: "", endereco: "" })
-    }
 
     listar() {
-        let clientes; 
+        let clientes;
         axios.get(`http://localhost:8080/cliente/`)
-        .then(res => {
-             clientes = res.data;
-             this.setState({clientes})
-            
-        })
-        return clientes;
- 
+            .then(res => {
+                clientes = res.data;
+                this.setState({ clientes })
 
-         }
+            })
+        return clientes;
+
+
+    }
 
     carregar(id) {
         axios.get(`http://localhost:8080/cliente/` + id)
@@ -59,41 +57,94 @@ export default class Clientes extends Component {
         debugger;
     }
 
-    handleSubmit = event => {
-        debugger;
-        event.preventDefault();
-        const cliente = {
-            id: this.state.id,
-            nome: this.state.nome,
-            email: this.state.email,
-            telefone: this.state.telefone,
-            endereco: this.state.endereco
-        };
+    handleSubmit = (c) => {
 
-        if (cliente.id == "") {
-            const novoCliente = {
-                nome: this.state.nome,
-                email: this.state.email,
-                telefone: this.state.telefone,
-                endereco: this.state.endereco
-            };
+        if (this.validaCampos(c)) {
+            let cliente = c;
+            if (this.state.id != "") {
+                cliente = {
+                    id: this.state.id,
+                    nome: this.state.nome,
+                    email: this.state.email,
+                    telefone: this.state.telefone,
+                    endereco: this.state.endereco
+                };
+                this.putCliente(cliente);
+            }
+            let novoCliente = "";
+            if (cliente.id == "") {
+                novoCliente = {
+                    nome: this.state.nome,
+                    email: this.state.email,
+                    telefone: this.state.telefone,
+                    endereco: this.state.endereco
 
-            axios.post(`http://localhost:8080/cliente/`, { "nome": novoCliente.nome, "email": novoCliente.email, "telefone": novoCliente.telefone, "endereco": novoCliente.endereco })
-                .then(res => {
-                    this.listar();
-                })
+                };
+                this.postCliente(novoCliente);
+            }
 
-        } else {
-
-            axios.put(`http://localhost:8080/cliente/` + cliente.id, cliente)
-                .then(res => {
-                    this.listar();
-                })
+        }else{
+            alert("Você não informou os dados corretamente")
         }
+
+
+    }
+
+    putCliente(cliente) {
+        axios.put(`http://localhost:8080/cliente/` + cliente.id, cliente)
+            .then(res => {
+                this.limpaCampos();
+                this.listar();
+            })
+    }
+
+    postCliente(novoCliente) {
+        axios.post(`http://localhost:8080/cliente/`, { "nome": novoCliente.nome, "email": novoCliente.email, "telefone": novoCliente.telefone, "endereco": novoCliente.endereco })
+            .then(res => {
+                this.limpaCampos();
+                this.listar();
+            })
+
     }
 
     componentDidMount = () => {
         this.listar();
+    }
+
+    limpaCampos = event => {
+        if (typeof event != 'undefined')
+            event.preventDefault();
+
+        debugger;
+        document.getElementById("nome").value = "";
+        document.getElementById("endereco").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("telefone").value = "";
+        document.getElementById("id").value = "";
+
+        this.setParam("nome", "")
+        this.setParam("endereco", "")
+        this.setParam("email", "")
+        this.setParam("telefone", "")
+        this.setParam("id", "")
+
+    }
+
+    validaCampos(cliente) {
+        debugger;
+        if (cliente.nome === null || cliente.nome === "") {
+            return false;
+        }
+        if (cliente.endereco === null || cliente.endereco === "") {
+            return false;
+        }
+        if (cliente.email === null || cliente.email === "") {
+            return false;
+        }
+        if (cliente.telefone === null || cliente.telefone === "") {
+            return false;
+        }
+        return true;
     }
 
     passValue(cliente) {
@@ -103,6 +154,7 @@ export default class Clientes extends Component {
         document.getElementById("email").value = cliente.email;
         document.getElementById("telefone").value = cliente.telefone;
         document.getElementById("id").value = cliente.id;
+
 
         this.setParam("id", cliente.id)
         this.setParam("nome", cliente.nome)
@@ -162,34 +214,33 @@ export default class Clientes extends Component {
 
                         <div className="form-group">
                             <label for="nome">Nome</label>
-                            <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={e => this.setParam("nome", e.target.value)} />
-                            <input type="text" className="form-control" id="id" placeholder="Nome" style={{display:'none'}}/>
+                            <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={e => this.setParam("nome", e.target.value)} required />
+                            <input type="text" className="form-control" id="id" placeholder="Nome" style={{ display: 'none' }} required />
 
                         </div>
 
                         <div className="form-row">
                             <div className="form-group col-md-6">
                                 <label for="email">Email</label>
-                                
-                                <input type="email" className="form-control" id="email" placeholder="Email" onChange={e => this.setParam("email", e.target.value)} />
+                                <input type="email" className="form-control" id="email" placeholder="Email" onChange={e => this.setParam("email", e.target.value)} required />
                             </div>
                             <div className="form-group">
                                 <label for="telefone">Telefone</label>
-                                <input type="text" className="form-control" id="telefone" placeholder="Telefone" onChange={e => this.setParam("telefone", e.target.value)} />
+                                <input type="text" className="form-control" id="telefone" placeholder="Telefone" onChange={e => this.setParam("telefone", e.target.value)} required />
                             </div>
                             <div className="form-group">
                                 <label for="endereco">Endereco</label>
-                                <input type="text" className="form-control" id="endereco" placeholder="Endereco" onChange={e => this.setParam("endereco", e.target.value)} />
+                                <input type="text" className="form-control" id="endereco" placeholder="Endereco" onChange={e => this.setParam("endereco", e.target.value)} required />
                             </div>
 
                         </div>
                         <br /><br />
                         <div className="d-flex justify-content-center">
                             <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
-                                <button type="reset" className="btn btn-success" onClick={this.handleSubmit}>Enviar</button>
+                                <button type="reset" className="btn btn-success" onClick={() => this.handleSubmit(this.state)}>Enviar</button>
                             </div>
                             <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
-                                <button type="reset" className="btn btn-dark" onReset={this.limpaCampos}>Limpar</button>
+                                <button type="submit" className="btn btn-dark" onClick={this.limpaCampos}>Limpar</button>
                             </div>
                         </div>
                     </form>

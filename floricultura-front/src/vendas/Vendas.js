@@ -69,7 +69,8 @@ export default class Vendas extends Component {
                 this.setState({ vendas });
             })
 
-        }
+
+    }
 
     componentDidMount() {
         this.loadClientes();

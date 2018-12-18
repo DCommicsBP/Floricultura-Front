@@ -7,7 +7,7 @@ export default class Usuarios extends Component {
         super(props);
     }
     state = {
-        usuarios: [], nome: "", login: "", senha: "", confirmeSenha: "", id:"", usuario:{nome: "", login: "", senha: "", confirmeSenha: "", id:""}
+        usuarios: [], nome: "", login: "", senha: "", confirmeSenha: "", id:"", usuario:{nome: "", login: "", senha: "", confirmeSenha: "", id:"", isVisible: true}
     }
 
     setParam(param, valor) {
@@ -23,18 +23,26 @@ export default class Usuarios extends Component {
 
     verificacao(usuario) {
         debugger;
-        if (usuario.senha != usuario.confirmeSenha) {
+        if (usuario.senha != usuario.confirmeSenha)
             return false;
-        }
-        if (usuario.senha == "" || usuario.confirmeSenha == "" || usuario.login == "" || usuario.nome == "") {
+        
+        if (usuario.senha == "") 
             return false;
-        }
+        if( usuario.confirmeSenha == "")
+            return false;
+        if(usuario.login == "")
+            return false;
+        if(usuario.nome == "")
+            return false;
+        
         return true;
     }
 
     handleSubmit = event => {
         event.preventDefault();
         debugger;
+
+
         const usuario = {
             nome: this.state.nome,
             login: this.state.login,
@@ -43,24 +51,28 @@ export default class Usuarios extends Component {
             id: this.state.id
         };
 
+        if(this.verificacao(usuario)){
             let teste = { "nome": usuario.nome, "login": usuario.login, "senha": usuario.senha }
-        if(usuario.id==""){
-            if (this.verificacao(usuario)) {
+            if(usuario.id==""){
                 this.setState({ nome: "", login: "", senha: "", confirmeSenha: "" })
                 axios.post(`http://localhost:8080/usuario/`, teste)
                     .then(res => {
+                        this.limpaCampos(); 
                         this.listar();
                     })
-            } else {
-                return;
-            }
+            
 
         }else{
             axios.put(`http://localhost:8080/usuario/`+usuario.id,usuario)
                     .then(res => {
+                        this.limpaCampos(); 
                         this.listar();
                     })
             }
+        }else{
+            alert("Você não informou os dados corretamente!")
+        }
+            
     }
 
     listar() {
@@ -99,23 +111,40 @@ export default class Usuarios extends Component {
         debugger; 
         document.getElementById("id").value = usuario.id; 
         document.getElementById("nome").value = usuario.nome; 
-        document.getElementById("senha").value = usuario.senha; 
-        document.getElementById("senha02").value = usuario.senha02; 
+        //document.getElementById("senha").value = usuario.senha; 
+        //document.getElementById("senha02").value = usuario.senha; 
         document.getElementById("login").value = usuario.login; 
 
         this.setParam("id", usuario.id)
         this.setParam("nome", usuario.nome)
-        this.setParam("senha", usuario.senha)
-        this.setParam("senha02", usuario.senha02)
+        //this.setParam("senha", usuario.senha)
+        //this.setParam("senha02", usuario.senha)
         this.setParam("login", usuario.login)
 
-    }
+    }   
     
     idVerifica(prop){
         if(prop == "") return <h3>Novo Usuário</h3>
         if(prop != "") return <h3>Editar Usuário</h3>
     }
 
+    limpaCampos = e =>{
+        if(typeof e != 'undefined'){
+            e.preventDefault(); 
+        }
+        document.getElementById("id").value = ""; 
+        document.getElementById("nome").value = ""; 
+        document.getElementById("senha").value = ""; 
+        document.getElementById("senha02").value = ""; 
+        document.getElementById("login").value = ""; 
+
+        this.setParam("id", "")
+        this.setParam("nome", "")
+        this.setParam("senha", "")
+        this.setParam("senha02", "")
+        this.setParam("login", "")
+
+    }
 
     render() {
         return (
@@ -181,7 +210,7 @@ export default class Usuarios extends Component {
                             <button type="submit" className="btn btn-success" onClick={this.handleSubmit}>Enviar</button>
                         </div>
                         <div style={{ borderStyle: 'solid', borderColor: 'white', borderWidth: '5px' }}>
-                            <button type="reset" className="btn btn-dark">Limpar</button>
+                            <button type="reset" className="btn btn-dark" onClick={this.limpaCampos}>Limpar</button>
                         </div>
                     </div>
                     <br /><br />

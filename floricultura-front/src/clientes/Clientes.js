@@ -6,7 +6,7 @@ export default class Clientes extends Component {
     constructor() {
         super();
     }
-    state = { clientes: [], clienteParaEditar: {}, cliente: { nome: "", email: "", telefone: "", endereco: "", id: "" }, nome: "", email: "", telefone: "", endereco: "", id: "" }
+    state = { clientes: [], clienteParaEditar: {}, cliente: { nome: "", email: "", telefone: "", endereco: "", id: "" }, nome: "", email: "", telefone: "", endereco: "", id: "", isVisible: true }
     setParam(param, valor) {
         this.setState({
             [param]: valor
